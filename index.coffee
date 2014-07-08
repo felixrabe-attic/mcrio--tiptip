@@ -115,17 +115,19 @@ present = ->
 
 setImmediate -> present() if presentation.length > 0
 
+tt = (f) ->
+  (args...) ->
+    f args...
+    tiptip
+
 module.exports = tiptip =
-  config: (config_) ->
+  config: tt (config_) ->
     config = config_
-    tiptip
-  center: (s) ->
+  center: tt (s) ->
     presentation.push ['center', s]
-    tiptip
-  lines: (s) ->
+  lines: tt (s) ->
     lines = s.trim().split('\n')
     content = []
     for line in lines
       content.push line
       presentation.push ['lines', content.join('\n')] if line.trim()
-    tiptip
