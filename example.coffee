@@ -8,6 +8,9 @@ catch
 chalk = require 'chalk'
 
 tiptip
+.config
+  x: 10
+  y: 5
 .center ''
 .center 'Hello'
 .center 'World'

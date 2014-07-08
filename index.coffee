@@ -5,6 +5,10 @@ stripAnsi = require 'strip-ansi'
 keypress = require 'keypress'
 getWindowSize = require './get-window-size'
 
+position = 0
+presentation = []
+config = {}
+
 clear = (cursor) ->
   # https://github.com/TooTallNate/ansi.js/blob/master/examples/clear/index.js
   cursor
@@ -33,8 +37,8 @@ writeCenter = (cursor, content) ->
 writeTop = (cursor, content) ->
   lines = content.trim().split('\n')
   clear cursor
-  x = 5
-  y = 2
+  x = Number(config.x ? 5)
+  y = Number(config.y ? 2)
   for line in lines
     cursor.goto x, y++
     cursor.write line
@@ -48,9 +52,6 @@ redraw = (cursor) ->
       writeCenter cursor, content
     else
       writeTop cursor, content
-
-position = 0
-presentation = []
 
 present = ->
   cursor = ansi(process.stdout)
@@ -80,6 +81,9 @@ present = ->
 setImmediate -> present() if presentation.length > 0
 
 module.exports = tiptip =
+  config: (config_) ->
+    config = config_
+    tiptip
   center: (s) ->
     presentation.push ['center', s]
     tiptip
