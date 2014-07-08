@@ -37,8 +37,7 @@ writeCenter = (cursor, content) ->
 writeTop = (cursor, content) ->
   lines = content.trim().split('\n')
   clear cursor
-  x = Number(config.x ? 5)
-  y = Number(config.y ? 2)
+  {x, y} = config
   for line in lines
     cursor.goto x, y++
     cursor.write line
@@ -46,14 +45,36 @@ writeTop = (cursor, content) ->
 
 redrawed = 0
 redraw = (cursor) ->
-  [pos, content] = presentation[position]
-  switch pos
+  [kind, content] = presentation[position]
+  switch kind
     when 'center'
       writeCenter cursor, content
     else
       writeTop cursor, content
 
+determineLargestBoundingBox = ->
+  x = 0
+  y = 0
+  for [kind, content] in presentation
+    lines = content.trim().split('\n')
+    y = Math.max y, lines.length
+    for line in lines
+      x = Math.max x, (stripAnsi line).length
+  [x, y]
+
+previewBoundingBox = (cursor) ->
+  [bbX, bbY] = determineLargestBoundingBox()
+  {x, y} = config
+  clear cursor
+  for offsetY in [0...bbY]
+    cursor.goto x, y + offsetY
+    cursor.bg.grey()
+    cursor.write Array(bbX + 1).join ' '
+    cursor.bg.reset()
+
 present = ->
+  config.x = Number config.x ? 5
+  config.y = Number config.y ? 2
   cursor = ansi(process.stdout)
   cursor.hide()
   clear cursor
@@ -65,8 +86,10 @@ present = ->
     switch key?.name
       when 'escape', 'q'
         exit cursor
-      when 'l'  # redraw
+      when 'l'
         redraw cursor
+      when 'p'
+        previewBoundingBox cursor
       when 'left', 'up', 'backspace'
         prevPosition = position
         position = Math.max 0, position - 1
