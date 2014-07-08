@@ -127,5 +127,5 @@ module.exports = tiptip =
     content = []
     for line in lines
       content.push line
-      presentation.push ['top', content.join('\n')]
+      presentation.push ['lines', content.join('\n')] if line.trim()
     tiptip

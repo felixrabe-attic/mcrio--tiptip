@@ -16,6 +16,8 @@ tiptip
 .center 'World'
 .lines """
   This is a
+
   big
+
   #{chalk.blue 'surprise!'}
 """
