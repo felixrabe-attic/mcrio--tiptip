@@ -14,6 +14,9 @@ tiptip
 .center ''
 .center 'Hello'
 .center 'World'
+.start()
+.center 'HELLO'
+.center '!!! WORLD !!!'
 .lines """
   This is a
 

@@ -131,3 +131,5 @@ module.exports = tiptip =
     for line in lines
       content.push line
       presentation.push ['lines', content.join('\n')] if line.trim()
+  start: tt ->
+    position = presentation.length
