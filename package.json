@@ -1,6 +1,6 @@
 {
   "name": "tiptip",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Terminal Plain-Text Presentations",
   "scripts": {
     "prepublish": "./node_modules/.bin/coffee -c ./*.coffee"
