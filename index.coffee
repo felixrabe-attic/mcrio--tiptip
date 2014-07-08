@@ -90,6 +90,18 @@ present = ->
         redraw cursor
       when 'p'
         previewBoundingBox cursor
+      when 'x'
+        if key.shift
+          config.x += 1
+        else
+          config.x = Math.max 0, config.x - 1
+        previewBoundingBox cursor
+      when 'y'
+        if key.shift
+          config.y += 1
+        else
+          config.y = Math.max 0, config.y - 1
+        previewBoundingBox cursor
       when 'left', 'up', 'backspace'
         prevPosition = position
         position = Math.max 0, position - 1
