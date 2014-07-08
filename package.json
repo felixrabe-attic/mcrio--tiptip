@@ -1,1 +1,32 @@
-{}
+{
+  "name": "tiptip",
+  "version": "0.0.0",
+  "description": "Terminal Plain-Text Presentations",
+  "scripts": {
+    "prepublish": "./node_modules/.bin/coffee -c ./*.coffee"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mcrio/tiptip.git"
+  },
+  "keywords": [
+    "terminal",
+    "plain-text",
+    "presentation"
+  ],
+  "author": "Felix Rabe <felix@rabe.io>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mcrio/tiptip/issues"
+  },
+  "homepage": "https://github.com/mcrio/tiptip",
+  "dependencies": {
+    "ansi": "^0.3.0",
+    "chalk": "^0.5.0",
+    "keypress": "^0.2.1",
+    "strip-ansi": "^0.3.0"
+  },
+  "devDependencies": {
+    "coffee-script": "^1.7.1"
+  }
+}
